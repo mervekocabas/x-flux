@@ -186,6 +186,7 @@ def main():
             )
             args.resume_from_checkpoint = None
             initial_global_step = 0
+            import ipdb; ipdb.set_trace()
         else:
             accelerator.print(f"Resuming from checkpoint {path}")
             accelerator.load_state(os.path.join(args.output_dir, path))
@@ -193,6 +194,7 @@ def main():
 
             initial_global_step = global_step
             first_epoch = global_step // num_update_steps_per_epoch
+
 
     else:
         initial_global_step = 0
@@ -202,9 +204,6 @@ def main():
         desc="Steps",
         disable=not accelerator.is_local_main_process,
     )
-
-    import ipdb; ipdb.set_trace()
-
 
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
