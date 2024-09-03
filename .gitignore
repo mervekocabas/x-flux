@@ -53,6 +53,11 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+images/
+openpose_data/
+results/
+saves_canny/
+xflux-env/
 
 # Translations
 *.mo
