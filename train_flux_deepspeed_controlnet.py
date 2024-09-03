@@ -207,7 +207,7 @@ def main():
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
         import ipdb; ipdb.set_trace()
-        for step, batch, ... in enumerate(train_dataloader):
+        for step, batch in enumerate(train_dataloader):
             with accelerator.accumulate(controlnet):
                 
                 img, control_image, prompts = batch
