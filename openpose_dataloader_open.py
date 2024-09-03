@@ -8,7 +8,7 @@ from tqdm import tqdm
 filelock.FileLock = filelock.SoftFileLock
 from datasets import load_dataset
 
-ds = load_dataset("raulc0399/open_pose_controlnet", split='train', cache_dir='openpose_data', streaming=True)
+ds = load_dataset("raulc0399/open_pose_controlnet", split='train', cache_dir='openpose_data/', streaming=True)
 
 # ds = load_dataset("hazal-karakus/mscoco-controlnet-canny-less-colors",cache_dir='images/')
 
