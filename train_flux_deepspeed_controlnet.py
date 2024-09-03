@@ -163,6 +163,7 @@ def main():
 
     timesteps = list(torch.linspace(1, 0, 1000).numpy())
     total_batch_size = args.train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps
+    import ipdb; ipdb.set_trace()
 
     logger.info("***** Running training *****")
     logger.info(f"  Num Epochs = {args.num_train_epochs}")
@@ -186,7 +187,6 @@ def main():
             )
             args.resume_from_checkpoint = None
             initial_global_step = 0
-            import ipdb; ipdb.set_trace()
         else:
             accelerator.print(f"Resuming from checkpoint {path}")
             accelerator.load_state(os.path.join(args.output_dir, path))
