@@ -56,6 +56,7 @@ class CustomImageDataset(Dataset):
             
             json_path = self.images[idx].split('.')[0] + '.json'
             prompt = json_path.read().strip()
+            
             return img, hint, prompt
         except Exception as e:
             print(e)
