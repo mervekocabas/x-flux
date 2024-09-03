@@ -8,16 +8,6 @@ import json
 import random
 import cv2
 
-
-def canny_processor(image, low_threshold=100, high_threshold=200):
-    image = np.array(image)
-    image = cv2.Canny(image, low_threshold, high_threshold)
-    image = image[:, :, None]
-    image = np.concatenate([image, image, image], axis=2)
-    canny_image = Image.fromarray(image)
-    return canny_image
-
-
 def c_crop(image):
     width, height = image.size
     new_size = min(width, height)
@@ -29,10 +19,22 @@ def c_crop(image):
 
 class CustomImageDataset(Dataset):
     def __init__(self, img_dir, img_size=512):
-        self.images = [os.path.join(img_dir, i) for i in os.listdir(img_dir) if '.jpg' in i or '.png' in i]
-        self.images.sort()
+        self.img_dir = img_dir
+        self.images = []
+        self.controlimages = []
+        self.load_images()
         self.img_size = img_size
 
+    def load_images(self):
+        for filename in os.listdir(self.img_dir):
+            if filename.endswith(('.jpg', '.png')):  # Check for image file extensions
+                if filename[0].isdigit():  # Check if the first character is a digit
+                    self.images.append(os.path.join(self.img_dir, filename))
+                elif filename[0].isalpha():  # Check if the first character is an alphabet
+                    self.controlimages.append(os.path.join(self.img_dir, filename))
+        self.images.sort()
+        self.controlimages.sort()
+        
     def __len__(self):
         return len(self.images)
 
@@ -41,13 +43,19 @@ class CustomImageDataset(Dataset):
             img = Image.open(self.images[idx])
             img = c_crop(img)
             img = img.resize((self.img_size, self.img_size))
-            hint = canny_processor(img)
+
+            hint = Image.open(self.controlimages[idx])
+            hint = c_crop(hint)
+            hint = hint.resize((self.img_size, self.img_size))
+
+
             img = torch.from_numpy((np.array(img) / 127.5) - 1)
             img = img.permute(2, 0, 1)
             hint = torch.from_numpy((np.array(hint) / 127.5) - 1)
             hint = hint.permute(2, 0, 1)
+            
             json_path = self.images[idx].split('.')[0] + '.json'
-            prompt = json.load(open(json_path))['caption']
+            prompt = json_file.read().strip()
             return img, hint, prompt
         except Exception as e:
             print(e)
