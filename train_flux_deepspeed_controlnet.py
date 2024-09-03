@@ -203,11 +203,12 @@ def main():
         desc="Steps",
         disable=not accelerator.is_local_main_process,
     )
-    import ipdb; ipdb.set_trace()
+
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
         for step, batch in enumerate(train_dataloader):
             with accelerator.accumulate(controlnet):
+                import ipdb; ipdb.set_trace()
                 img, control_image, prompts = batch
                 control_image = control_image.to(accelerator.device)
                 with torch.no_grad():
