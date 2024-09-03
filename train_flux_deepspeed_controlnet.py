@@ -163,7 +163,6 @@ def main():
 
     timesteps = list(torch.linspace(1, 0, 1000).numpy())
     total_batch_size = args.train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps
-    import ipdb; ipdb.set_trace()
 
     logger.info("***** Running training *****")
     logger.info(f"  Num Epochs = {args.num_train_epochs}")
@@ -204,7 +203,7 @@ def main():
         desc="Steps",
         disable=not accelerator.is_local_main_process,
     )
-
+    import ipdb; ipdb.set_trace()
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
         for step, batch in enumerate(train_dataloader):
