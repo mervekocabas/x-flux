@@ -203,6 +203,9 @@ def main():
         disable=not accelerator.is_local_main_process,
     )
 
+    import ipdb; ipdb.set_trace()
+
+
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
         for step, batch in enumerate(train_dataloader):
@@ -223,7 +226,6 @@ def main():
                 x_t = (1 - t.unsqueeze(1).unsqueeze(2).repeat(1, x_1.shape[1], x_1.shape[2])) * x_1 + t.unsqueeze(1).unsqueeze(2).repeat(1, x_1.shape[1], x_1.shape[2]) * x_0
                 bsz = x_1.shape[0]
                 guidance_vec = torch.full((x_t.shape[0],), 4, device=x_t.device, dtype=x_t.dtype)
-                import ipdb; ipdb.set_trace()
                 block_res_samples = controlnet(
                     img=x_t.to(weight_dtype),
                     img_ids=inp['img_ids'].to(weight_dtype),
