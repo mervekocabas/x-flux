@@ -40,6 +40,7 @@ class CustomImageDataset(Dataset):
 
     def __getitem__(self, idx):
         try:
+            import ipdb; ipdb.set_trace()
             img = Image.open(self.images[idx])
             img = c_crop(img)
             img = img.resize((self.img_size, self.img_size))
@@ -56,7 +57,7 @@ class CustomImageDataset(Dataset):
             
             json_path = self.images[idx].split('.')[0] + '.json'
             prompt = json_path.read().strip()
-            
+            import ipdb; ipdb.set_trace()
             return img, hint, prompt
         except Exception as e:
             print(e)
