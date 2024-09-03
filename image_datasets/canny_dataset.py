@@ -55,8 +55,8 @@ class CustomImageDataset(Dataset):
             hint = hint.permute(2, 0, 1)
             
             json_path = self.images[idx].split('.')[0] + '.json'
-            prompt = json_file.read().strip()
-            return (img, hint, prompt)
+            prompt = json_path.read().strip()
+            return img, hint, prompt
         except Exception as e:
             print(e)
             return self.__getitem__(random.randint(0, len(self.images) - 1))
