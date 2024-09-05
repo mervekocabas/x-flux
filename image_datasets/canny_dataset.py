@@ -45,10 +45,9 @@ class CustomImageDataset(Dataset):
             img = img.resize((self.img_size, self.img_size))
 
             hint = Image.open(self.controlimages[idx])
-            hint = hint.convert('L')
             hint = c_crop(hint)
             hint = hint.resize((self.img_size, self.img_size))
-
+            hint = hint.convert('L')
 
             img = torch.from_numpy((np.array(img) / 127.5) - 1)
             img = img.permute(2, 0, 1)
