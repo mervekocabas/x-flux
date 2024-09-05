@@ -134,6 +134,7 @@ celerybeat.pid
 .venv
 env/
 venv/
+xflux_env/
 ENV/
 env.bak/
 venv.bak/
