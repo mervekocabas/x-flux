@@ -3,7 +3,7 @@ data_config:
   train_batch_size: 4
   num_workers: 4
   img_size: 512
-  img_dir: images/
+  img_dir: openpose_data/
 report_to: wandb
 train_batch_size: 3
 output_dir: saves_openpose/
