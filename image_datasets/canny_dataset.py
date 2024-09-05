@@ -48,19 +48,22 @@ class CustomImageDataset(Dataset):
             hint = c_crop(hint)
             hint = hint.resize((self.img_size, self.img_size))
             # Ensure control image (hint) is 3-channel
-            if hint.ndim == 2:  # If the control image is grayscale
-                hint = hint.unsqueeze(2)  # Add channel dimension
-                hint = hint.repeat(1, 1, 3)  # Duplicate across 3 channels
+            hint_np = np.array(hint)
+
+            # Check if the control image (hint) is grayscale (single-channel)
+            if hint_np.ndim == 2:  # Grayscale image has 2 dimensions (H, W)
+                hint_np = np.expand_dims(hint_np, axis=2)  # Add channel dimension
+                hint_np = np.repeat(hint_np, 3, axis=2)  # Duplicate across 3 channels (H, W, C)
 
             img = torch.from_numpy((np.array(img) / 127.5) - 1)
             img = img.permute(2, 0, 1)
-            hint = torch.from_numpy((np.array(hint) / 127.5) - 1)
+            hint = torch.from_numpy((hint_np / 127.5) - 1)
             hint = hint.permute(2, 0, 1)
             
             # Load the prompt from JSON file
             json_path = self.images[idx].replace('.jpg', '.json').replace('.png', '.json')
             with open(json_path, 'r') as f:
-                prompt = json.load(f)['text']
+                prompt = f.read()
 
             return img, hint, prompt
         except Exception as e:

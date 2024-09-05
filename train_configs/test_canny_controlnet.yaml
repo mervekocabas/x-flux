@@ -3,11 +3,11 @@ data_config:
   train_batch_size: 4
   num_workers: 4
   img_size: 512
-  img_dir: testimg/
+  img_dir: imagesl/
   #images/
 report_to: wandb
 train_batch_size: 3
-output_dir: saves_canny/
+output_dir: saves_cannyl/
 max_train_steps: 100000
 learning_rate: 2e-5
 lr_scheduler: constant

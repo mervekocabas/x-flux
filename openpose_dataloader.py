@@ -10,10 +10,10 @@ from datasets import load_dataset
 
 # ds = load_dataset("raulc0399/open_pose_controlnet",cache_dir='openpose_data', streaming=True)
 
-ds = load_dataset("hazal-karakus/mscoco-controlnet-canny-less-colors", split='train', cache_dir='images/', streaming=True)
+ds = load_dataset("hazal-karakus/mscoco-controlnet-canny-less-colors", split='train', cache_dir='imagesl/', streaming=True)
 
 # Specify the directory to save images
-image_dir = '/home/mkocabas/projects/x-flux/images/'
+image_dir = '/home/mkocabas/projects/x-flux/imagesl/'
 
 # Create the directory if it doesn't exist
 os.makedirs(image_dir, exist_ok=True)
@@ -29,5 +29,5 @@ for data in ds:
 
     i += 1
 
-    if i > 100:
+    if i > 5:
         break
