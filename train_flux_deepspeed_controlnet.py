@@ -194,7 +194,6 @@ def main():
             initial_global_step = global_step
             first_epoch = global_step // num_update_steps_per_epoch
 
-
     else:
         initial_global_step = 0
     progress_bar = tqdm(
@@ -206,10 +205,8 @@ def main():
 
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
-        import ipdb; ipdb.set_trace()
         for step, batch in enumerate(train_dataloader):
             with accelerator.accumulate(controlnet):
-                
                 img, control_image, prompts = batch
                 control_image = control_image.to(accelerator.device)
                 with torch.no_grad():
@@ -226,6 +223,7 @@ def main():
                 x_t = (1 - t.unsqueeze(1).unsqueeze(2).repeat(1, x_1.shape[1], x_1.shape[2])) * x_1 + t.unsqueeze(1).unsqueeze(2).repeat(1, x_1.shape[1], x_1.shape[2]) * x_0
                 bsz = x_1.shape[0]
                 guidance_vec = torch.full((x_t.shape[0],), 4, device=x_t.device, dtype=x_t.dtype)
+
                 block_res_samples = controlnet(
                     img=x_t.to(weight_dtype),
                     img_ids=inp['img_ids'].to(weight_dtype),
