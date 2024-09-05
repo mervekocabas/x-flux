@@ -7,7 +7,7 @@ data_config:
   #images/
 report_to: wandb
 train_batch_size: 3
-output_dir: saves_cannyl/
+output_dir: saves_canny/
 max_train_steps: 100000
 learning_rate: 2e-5
 lr_scheduler: constant
