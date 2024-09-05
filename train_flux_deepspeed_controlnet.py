@@ -45,8 +45,8 @@ logger = get_logger(__name__, log_level="INFO")
 def get_models(name: str, device, offload: bool, is_schnell: bool):
     t5 = load_t5(device, max_length=256 if is_schnell else 512)
     clip = load_clip(device)
-    model = load_flow_model2(name, device="gpu")
-    vae = load_ae(name, device="gpu" if offload else device)
+    model = load_flow_model2(name, device="cpu")
+    vae = load_ae(name, device="cpu" if offload else device)
     return model, vae, t5, clip
 
 def parse_args():
