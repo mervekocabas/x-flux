@@ -7,7 +7,7 @@ data_config:
 report_to: wandb
 train_batch_size: 3
 output_dir: saves_openpose/
-max_train_steps: 100000
+max_train_steps: 4
 learning_rate: 2e-5
 lr_scheduler: constant
 lr_warmup_steps: 10
@@ -18,7 +18,7 @@ adam_epsilon: 1e-8
 max_grad_norm: 1.0
 logging_dir: logs
 mixed_precision: "bf16"
-checkpointing_steps: 2500
+checkpointing_steps: 2
 checkpoints_total_limit: 10
 tracker_project_name: openpose_training
 resume_from_checkpoint: latest
