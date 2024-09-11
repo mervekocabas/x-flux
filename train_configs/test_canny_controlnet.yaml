@@ -8,7 +8,7 @@ data_config:
 report_to: wandb
 train_batch_size: 3
 output_dir: saves_canny/
-max_train_steps: 2600
+max_train_steps: 2602
 learning_rate: 2e-5
 lr_scheduler: constant
 lr_warmup_steps: 10

@@ -249,3 +249,7 @@ We are working on releasing new ControlNet weight models for Flux: **OpenPose**,
 Stay tuned with [XLabs AI](https://github.com/XLabs-AI) to see **IP-Adapters** for Flux.
 
 ![Follow Our Updates](./assets/readme/dark/follow-cta-rev2.png)
+
+Cuda home!!!!!
+export CUDA_HOME=/is/software/nvidia/cudnn-8.9.1-cu12.x/ 
+bash rc ye yazma proje spesifik 
